@@ -1,7 +1,8 @@
 // WAGTAIL_SSH_USER and WAGTAIL_HOST should be provided by the seed job's environment
 
 String fabric_script(String command, String args = "") {
-    return """#!/usr/bin/env bash
+    return """
+    #!/usr/bin/env bash
 
     # Assumptions:
     # - virtualenv is installed on the jenkins host (apt-get install python-virtualenv)
@@ -14,7 +15,7 @@ String fabric_script(String command, String args = "") {
     source venv/bin/activate
     pip install fabric
     fab $command -u \$USER -H \$HOST $args
-   """.stripIndent()
+    """.stripIndent()
 }
 
 job('wagtail-initialize-webserver') {
