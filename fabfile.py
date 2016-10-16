@@ -41,6 +41,7 @@ def init():
 
         with prefix('source venv/bin/activate'):
             run('pip install -r requirements.txt')
+            run('pip install gunicorn')
             run('./manage.py migrate')
             run('./manage.py load_initial_data')
             run('./manage.py collectstatic --no-input')
