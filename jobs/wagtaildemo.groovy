@@ -16,7 +16,7 @@ String fabric_script(String command, String args = "") {
    """.stripIndent()
 }
 
-job('Initialize Wagtail Webserver') {
+job('wagtail-initialize-webserver') {
     scm {
         git {
 		    remote {
@@ -29,7 +29,7 @@ job('Initialize Wagtail Webserver') {
     }
 }
 
-job('Deploy Wagtail') {
+job('wagtail-deploy') {
     scm {
         git {
 		    remote {
