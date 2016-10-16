@@ -59,8 +59,9 @@ def init():
     sudo('service supervisor restart')
 
 def deploy():
-    with cd('wagtaildemo'):
+    with cd('/wagtaildemo'):
         run('git pull')
         with prefix('source venv/bin/activate'):
             run('pip install -r requirements.txt')
             run('./manage.py migrate')
+            run('./manage.py collectstatic')
