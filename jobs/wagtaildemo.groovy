@@ -1,7 +1,8 @@
 // WAGTAIL_SSH_USER and WAGTAIL_HOST should be provided by the seed job's environment
 
 String fabric_script(String command, String args = "") {
-    return """
+    return """#!/usr/bin/env bash
+
     # Assumptions:
     # - virtualenv is installed on the jenkins host (apt-get install python-virtualenv)
     # - jenkins can SSH into \$USER@\$HOST using a passwordless SSH key
