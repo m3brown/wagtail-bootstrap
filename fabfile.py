@@ -1,5 +1,6 @@
 from fabric.api import *
 from fabric.contrib.files import exists
+from time import sleep
 
 class FabricException(Exception):
     pass
@@ -48,14 +49,14 @@ def init():
             # automated createsuperuser
             run('echo "from django.contrib.auth.models import User; User.objects.create_superuser(\'admin\', \'admin@example.com\', \'excella\')" | ./manage.py shell')
 
-    sudo('apt-get install -y nginx gunicorn')
+    sudo('apt-get install -y nginx supervisor')
 
-    put('wagtail-gunicorn.conf', '/etc/gunicorn.d/wagtail.conf', use_sudo=True)
+    put('wagtail-supervisor.conf', '/etc/supervisor/conf.d/wagtail.conf', use_sudo=True)
     put('wagtail-nginx.conf', '/etc/nginx/sites-available/wagtail', use_sudo=True)
     sudo('ln -sf /etc/nginx/sites-available/wagtail /etc/nginx/sites-enabled/wagtail')
     sudo('rm -f /etc/nginx/sites-enabled/default')
     sudo('service nginx restart')
-    sudo('service gunicorn restart')
+    sudo('service supervisor restart')
 
 def deploy():
     with cd('wagtaildemo'):
